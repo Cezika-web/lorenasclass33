@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Lorena — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Revisão Unidade 1 — Países, perguntas e possessivos</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Lorena &nbsp;•&nbsp;
+            <strong>Data:</strong> 03/03/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Revisão da Unidade 1 com foco em países em inglês, perguntas básicas, possessivos (’s / apostrophe) e pronomes.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Nesta aula, fizemos uma <strong>revisão completa da Unidade 1</strong> com prática guiada e correções em tempo real.
+              Começamos com um <strong>warm-up em vídeo</strong> sobre “os países que mais tomam banho por semana”, usando isso para treinar
+              <strong>países em inglês</strong> e checar compreensão auditiva (ex.: <em>Brazil, Mexico, Spain, United Kingdom, United States</em>).
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Em seguida, revisamos <strong>perguntas essenciais</strong> e estrutura com <strong>to be</strong>, reforçando quando usar
+              <em>is / are</em> e a ordem correta em perguntas (ex.: <em>What is your name?</em>, <em>How old is your daughter?</em>, <em>Who are they?</em>).
+              Também tiramos dúvidas rápidas sobre <strong>AM/PM</strong> (por exemplo: <em>2 pm</em> é à tarde).
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois, avançamos para <strong>possessivos com apóstrofo</strong>, praticando a diferença entre <strong>’s</strong> (singular) e
+              <strong>s’</strong> (plural) e como isso muda o sentido (ex.: <em>Lorena’s house</em> vs. <em>students’ school</em>).
+              Finalizamos com exercícios de <strong>pronomes</strong> e pequenos diálogos para consolidar as respostas.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>guys</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) “pessoal”, “galera”</em><br>
+                <small>Hey, guys! Let’s start.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>apostrophe (’)</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) apóstrofo</em><br>
+                <small>Students’ school / Lorena’s house.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- NOVOS TÓPICOS: VOCABULÁRIO DA AULA, FRASES MODELO, CORREÇÕES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Países (Countries)</h3>
+            <ul>
+              <li><strong>Brazil</strong> – Brasil</li>
+              <li><strong>Mexico</strong> – México</li>
+              <li><strong>Spain</strong> – Espanha</li>
+              <li><strong>France</strong> – França</li>
+              <li><strong>Italy</strong> – Itália</li>
+              <li><strong>China</strong> – China</li>
+              <li><strong>Germany</strong> – Alemanha</li>
+              <li><strong>Australia</strong> – Austrália</li>
+              <li><strong>South Africa</strong> – África do Sul</li>
+              <li><strong>United Kingdom (UK)</strong> – Reino Unido</li>
+              <li><strong>United States (of America)</strong> – Estados Unidos</li>
+              <li><strong>New Zealand</strong> – Nova Zelândia</li>
+              <li><strong>Egypt</strong> – Egito</li>
+              <li><strong>Amsterdam</strong> – Amsterdã</li>
+            </ul>
+
+            <h3>Vocabulário de rotina e números</h3>
+            <ul>
+              <li><strong>shower</strong> – banho</li>
+              <li><strong>per week</strong> – por semana</li>
+              <li><strong>number one / number two</strong> – primeiro / segundo lugar</li>
+              <li><strong>fourteen</strong> – quatorze</li>
+              <li><strong>two per day</strong> – dois por dia</li>
+            </ul>
+
+            <h3>Estruturas trabalhadas</h3>
+            <ul>
+              <li><span style="font-family:monospace;">What is your name?</span> – Qual é o seu nome?</li>
+              <li><span style="font-family:monospace;">How old is your daughter?</span> – Quantos anos tem sua filha?</li>
+              <li><span style="font-family:monospace;">Who are they?</span> – Quem são eles/elas?</li>
+              <li><span style="font-family:monospace;">That is...</span> / <span style="font-family:monospace;">He is...</span> / <span style="font-family:monospace;">Her name is...</span></li>
+              <li><span style="font-family:monospace;">Lorena’s house</span> – a casa da Lorena (singular + ’s)</li>
+              <li><span style="font-family:monospace;">students’ school</span> – a escola dos estudantes (plural + s’)</li>
+              <li><span style="font-family:monospace;">2 pm</span> – duas da tarde</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>I have to watch this series.</li>
+              <li>How many showers per week do you take?</li>
+              <li>Brazil is number one.</li>
+              <li>What is your name?</li>
+              <li>How old is your daughter?</li>
+              <li>Who are they?</li>
+              <li>Lorena’s house is big.</li>
+              <li>My parents’ nationality is Brazilian.</li>
+              <li>Are you a photographer? Your pictures are great.</li>
+              <li>Our class is at 2 pm.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ✅ NOVA SEÇÃO FIXA: CORREÇÕES IMPORTANTES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li><strong>Pedido incompleto com “watch”</strong><br>
+                ❌ <em>Watch movie.</em><br>
+                ✅ <em>Watch a movie.</em> / <em>Watch a series.</em>
+              </li>
+              <li><strong>Confirmação</strong><br>
+                ❌ <em>It’s right.</em><br>
+                ✅ <em>That’s right.</em>
+              </li>
+              <li><strong>Ordem correta em perguntas (PT → EN)</strong><br>
+                ❌ <em>What is seu nome.</em><br>
+                ✅ <em>What is your name?</em>
+              </li>
+              <li><strong>“How old” com sujeito no singular</strong><br>
+                ❌ <em>How old are your daughter?</em><br>
+                ✅ <em>How old is your daughter?</em>
+              </li>
+              <li><strong>UK x England</strong><br>
+                ✅ <em>United Kingdom</em> = Reino Unido (inclui England, Scotland, Wales e Northern Ireland).<br>
+                ✅ <em>England</em> = Inglaterra (apenas uma parte do UK).
+              </li>
+              <li><strong>Possessivo com apóstrofo</strong><br>
+                ✅ Singular: <em>Lorena’s house</em> (Lorena + ’s)<br>
+                ✅ Plural: <em>students’ school</em> (students + s’)
+              </li>
+              <li><strong>AM/PM</strong><br>
+                ✅ <em>pm</em> = da tarde até a noite (ex.: <em>2 pm</em> = 14:00).
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!-- ✅ FIM DA NOVA SEÇÃO -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <!-- Transcrição sem link (apenas botão) -->
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <!-- Vídeo da aula com o link que você mandou -->
+            <a
+              class="media-btn"
+              href="https://youtu.be/9yYL2Kpl-vU"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <!-- ===== TABELA DE DISTRIBUIÇÃO DE FALA ===== -->
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">65%</span></td>
+                <td class="talk-time">~36 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Lorena</span></td>
+                <td><span class="talk-percent">35%</span></td>
+                <td class="talk-time">~19 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <!-- ===== FIM TABELA ===== -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado em aula):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Ler o pós-aula <strong>2 a 3x</strong> na semana.</li>
+            </ul>
+            <p style="margin:6px 0 0 0;">
+              <!-- Botão de tarefa de casa com link do Babadum -->
+              <a
+                href="https://babadum.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn secondary"
+                style="padding:8px 12px;border-radius:8px;font-weight:700;"
+              >
+                🎮 Abrir tarefa de casa (Babadum)
+              </a>
+            </p>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2026 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
